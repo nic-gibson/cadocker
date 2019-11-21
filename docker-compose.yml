@@ -1,0 +1,30 @@
+version: '3'
+
+volumes:
+    providence_web:
+    providence_db:
+
+services:
+    providence_db:
+        image: mariadb
+        restart: always
+        volumes:
+            - providence_db:/var/lib/mysql
+        environment:
+            - MYSQL_RANDOM_ROOT_PASSWORD=yes
+            - MYSQL_DATABASE=providence
+            - MYSQL_USER=providence
+            - MYSQL_PASSWORD=prvdnc
+
+    providence_web:
+        image: iametza/providence
+        restart: always
+        ports:
+            - 8080:80
+        volumes:
+            - providence_web:/var/www/hml
+        environment:
+            - PROVIDENCE_DB_HOST=providence_db
+            - PROVIDENCE_DB_USER=providence
+            - PROVIDENCE_DB_PASSWORD=prvdnc
+            - PROVIDENCE_DB_NAME=providence
