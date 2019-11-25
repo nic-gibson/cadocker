@@ -8,6 +8,9 @@ services:
     providence_db:
         image: mariadb
         restart: always
+        networks:
+            collectiveaccess:
+                ipv4_address: 172.16.0.2
         volumes:
             - providence_db:/var/lib/mysql
         environment:
@@ -19,6 +22,9 @@ services:
     providence_web:
         image: iametza/collective-access:1.7.8
         restart: always
+        networks:
+            collectiveaccess:
+                ipv4_address: 172.16.0.3
         ports:
             - 8080:80
         volumes:
@@ -28,3 +34,9 @@ services:
             - PROVIDENCE_DB_USER=providence
             - PROVIDENCE_DB_PASSWORD=prvdnc
             - PROVIDENCE_DB_NAME=providence
+networks:
+    collectiveaccess:
+        driver: bridge
+        ipam:
+            config:
+                - subnet: "172.16.0.0/16"
