@@ -26,7 +26,7 @@ RUN cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini;
 
 COPY docker-entrypoint.sh /usr/local/bin/       
 
-VOLUME /var/www/html:Q
+VOLUME /var/www/html
 
 RUN ["chmod", "+x", "/usr/local/bin/docker-entrypoint.sh"]
 
