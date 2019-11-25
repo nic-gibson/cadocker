@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y \
 RUN docker-php-ext-install zip
 
 # Mysql extensioa instalatu
-RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
+RUN docker-php-ext-install mysqli
 
 ENV PROVINCE_VERSION 1.7.8
 
