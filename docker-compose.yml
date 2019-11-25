@@ -17,12 +17,12 @@ services:
             - MYSQL_PASSWORD=prvdnc
 
     providence_web:
-        image: iametza/providence
+        image: iametza/collective-access:1.7.8
         restart: always
         ports:
             - 8080:80
         volumes:
-            - providence_web:/var/www/hml
+            - providence_web:/var/www/html
         environment:
             - PROVIDENCE_DB_HOST=providence_db
             - PROVIDENCE_DB_USER=providence

@@ -19,9 +19,14 @@ RUN curl -fsSL -o providence.zip \
 
 RUN unzip providence.zip; \
         rm providence.zip; \
-        mv providence-${PROVINCE_VERSION}/* /var/www/html/;
+	mkdir /usr/src/collective-access; \
+        mv providence-${PROVINCE_VERSION}/* /usr/src/collective-access/;
 
-COPY docker-entrypoint.sh /usr/local/bin/
+RUN cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini;
+
+COPY docker-entrypoint.sh /usr/local/bin/       
+
+VOLUME /var/www/html:Q
 
 RUN ["chmod", "+x", "/usr/local/bin/docker-entrypoint.sh"]
 
