@@ -39,6 +39,10 @@ cp /var/www/html/pawtucket/setup.php-dist /var/www/html/pawtucket/setup.php
 # Baimenak
 chown -R www-data:www-data /var/www/html/pawtucket
 
+# Sortu lotura sinbolikoa
+ln -s  /var/www/html/media /var/www/html/pawtucket/media
+chown -h www-data:www-data /var/www/html/pawtucket/media
+
 # DB konexioa
 sed -i 's/localhost/'"$PROVIDENCE_DB_HOST"'/g' /var/www/html/pawtucket/setup.php
 sed -i 's/my_database_user/'"$PROVIDENCE_DB_USER"'/g' /var/www/html/pawtucket/setup.php
