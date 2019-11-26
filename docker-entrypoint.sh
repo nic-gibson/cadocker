@@ -27,7 +27,10 @@ sed -i 's/info@put-your-domain-here.com/'"$PROVIDENCE_ADMIN_EMAIL"'/g' /var/www/
 ## Pawtucket2
 
 # Fitxategiak ekarri
-mkdir /var/www/html/pawtucket
+if [ ! -d /var/www/html/pawtucket ]
+then
+	mkdir /var/www/html/pawtucket
+fi
 cp -r /usr/src/pawtucket/* /var/www/html/pawtucket
 
 # Konfigurazio fitxategia sortu

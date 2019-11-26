@@ -3,8 +3,7 @@ version: '3'
 volumes:
     providence_web:
     providence_db:
-    pawtucket_web:
-
+    
 services:
     providence_db:
         image: mariadb
@@ -35,17 +34,7 @@ services:
             - PROVIDENCE_DB_USER=providence
             - PROVIDENCE_DB_PASSWORD=prvdnc
             - PROVIDENCE_DB_NAME=providence
-
-    pawtucket_web:
-        image: iametza/pawtucket:1.7.8
-        restart: always
-        networks:
-            collectiveaccess:
-                ipv4_address: 172.16.0.4
-         ports:
-            - 8081:80
-        volumes:
-            - pawtucket_web:/var/www/html/pawtucket
+   
 networks:
     collectiveaccess:
         driver: bridge
