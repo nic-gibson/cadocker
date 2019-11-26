@@ -32,12 +32,9 @@ cp -r /usr/src/pawtucket/* /var/www/html/
 cp /var/www/html/setup.php-dist /var/www/html/setup.php 
 
 
-# Media karpeta sortu
-if [ ! -d /var/www/html/media ]
-then
-	mkdir /var/www/html/media
-fi
+
 # Sortu lotura sinbolikoa
+mv /var/www/html/admin/media /var/www/html/
 ln -s  /var/www/html/media /var/www/html/admin/media
 chown -h www-data:www-data /var/www/html/admin/media/
 
