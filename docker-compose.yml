@@ -42,6 +42,8 @@ services:
         networks:
             collectiveaccess:
                 ipv4_address: 172.16.0.4
+         ports:
+            - 8081:80
         volumes:
             - pawtucket_web:/var/www/html/pawtucket
 networks:
