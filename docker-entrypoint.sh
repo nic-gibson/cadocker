@@ -2,6 +2,8 @@
 
 set -e
 
+## Collective Access
+
 # Fitxategiak ekarri
 cp -r /usr/src/collective-access/* /var/www/html/
 
@@ -21,6 +23,28 @@ sed -i 's/name_of_my_database/'"$PROVIDENCE_DB_NAME"'/g' /var/www/html/setup.php
 sed -i 's/My First CollectiveAccess System/'"$PROVIDENCE_APP_DISPLAY_NAME"'/g' /var/www/html/setup.php
 sed -i 's/info@put-your-domain-here.com/'"$PROVIDENCE_ADMIN_EMAIL"'/g' /var/www/html/setup.php
 
+
+## Pawtucket2
+
+# Fitxategiak ekarri
+mkdir /var/www/html/pawtucket
+cp -r /usr/src/pawtucket/* /var/www/html/pawtucket
+
+# Konfigurazio fitxategia sortu
+cp /var/www/html/pawtucket/setup.php-dist /var/www/html/pawtucket/setup.php 
+
+# Baimenak
+chown -R www-data:www-data /var/www/html/pawtucket
+
+# DB konexioa
+sed -i 's/localhost/'"$PROVIDENCE_DB_HOST"'/g' /var/www/html/pawtucket/setup.php
+sed -i 's/my_database_user/'"$PROVIDENCE_DB_USER"'/g' /var/www/html/pawtucket/setup.php
+sed -i 's/my_database_password/'"$PROVIDENCE_DB_PASSWORD"'/g' /var/www/html/pawtucket/setup.php
+sed -i 's/name_of_my_database/'"$PROVIDENCE_DB_NAME"'/g' /var/www/html/pawtucket/setup.php
+
+# APP config
+sed -i 's/My First CollectiveAccess System/'"$PROVIDENCE_APP_DISPLAY_NAME"'/g' /var/www/html/pawtucket/setup.php
+sed -i 's/info@put-your-domain-here.com/'"$PROVIDENCE_ADMIN_EMAIL"'/g' /var/www/html/pawtucket/setup.php
 
 # PHP entrypoint
 if [ "${1#-}" != "$1" ]; then
