@@ -8,8 +8,14 @@ if [ ! -d /var/www/html/admin ]
 then
 	mkdir /var/www/html/admin
 fi
+
 # Fitxategiak ekarri
-cp -r /usr/src/collective-access/* /var/www/html/admin/
+if [ -d /var/www/html/admin/media ]
+then
+    rsync -a /usr/src/collective-access/ /var/www/html/admin/ --exclude media/
+else
+    cp -r /usr/src/collective-access/* /var/www/html/admin/
+fi
 
 # Konfigurazio fitxategia sortu, ez bada existitzen
 if [ ! -f /var/www/html/admin/setup.php ]

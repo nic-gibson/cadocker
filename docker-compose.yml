@@ -1,26 +1,28 @@
 version: '3'
 
 volumes:
-    providence_web:
-    providence_db:
+    collectiveaccess_web:
+    collectiveaccess_db:
     
 services:
-    providence_db:
+    collectiveaccess_db:
         image: mariadb
+        container_name: collectiveaccess_db
         restart: always
         networks:
             collectiveaccess:
                 ipv4_address: 172.16.0.2
         volumes:
-            - providence_db:/var/lib/mysql
+            - collectiveaccess_db:/var/lib/mysql
         environment:
             - MYSQL_RANDOM_ROOT_PASSWORD=yes
             - MYSQL_DATABASE=providence
             - MYSQL_USER=providence
             - MYSQL_PASSWORD=prvdnc
 
-    providence_web:
+    collectiveaccess_web:
         image: iametza/collective-access:1.7.8
+        container_name: collectiveaccess_web
         restart: always
         networks:
             collectiveaccess:
@@ -28,7 +30,7 @@ services:
         ports:
             - 8080:80
         volumes:
-            - providence_web:/var/www/html
+            - collectiveaccess_web:/var/www/html
         environment:
             - PROVIDENCE_DB_HOST=providence_db
             - PROVIDENCE_DB_USER=providence
