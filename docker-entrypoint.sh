@@ -55,13 +55,15 @@ fi
 # Sortu lotura sinbolikoa
 if [ ! -d /var/www/html/media ]
 then
-    mv /var/www/html/admin/media /var/www/html/
-    ln -s  /var/www/html/media /var/www/html/admin/media
-    chown -h www-data:www-data /var/www/html/admin/media/
+    ln -s  /var/www/html/admin/media /var/www/html/media
+    chown -h www-data:www-data /var/www/html/media/
 fi
 
 # Baimenak egokitu
 chown -R www-data:www-data /var/www/html/
+
+# PHP.ini egokitu
+sed -i -E 's/upload_max_filesize = [0-9]+M/upload_max_filesize = 8M/g' /usr/local/etc/php/php.ini
 
 # PHP entrypoint
 if [ "${1#-}" != "$1" ]; then
