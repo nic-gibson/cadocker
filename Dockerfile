@@ -4,6 +4,13 @@ FROM php:7.3-apache-buster
 # Konfigurazioa
 #
 
+# Erabiltzaile nagusia
+USER fototeka
+
+# Apache erabiltzailea
+ENV APACHE_RUN_USER fototeka
+ENV APACHE_RUN_GROUP fototeka
+
 # Pakete bertsioak zehaztu
 ENV PROVINCE_VERSION 1.7.8
 ENV PAWTUCKET_VERSION 1.7.8

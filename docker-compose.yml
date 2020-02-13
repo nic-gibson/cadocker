@@ -16,9 +16,9 @@ services:
             - collectiveaccess_db:/var/lib/mysql
         environment:
             - MYSQL_RANDOM_ROOT_PASSWORD=yes
-            - MYSQL_DATABASE=providence
-            - MYSQL_USER=providence
-            - MYSQL_PASSWORD=prvdnc
+            - MYSQL_DATABASE=collectiveaccess
+            - MYSQL_USER=collectiveaccess
+            - MYSQL_PASSWORD=collectiveaccess
 
     collectiveaccess_web:
         image: iametza/collective-access:1.7.8
@@ -28,14 +28,14 @@ services:
             collectiveaccess:
                 ipv4_address: 172.16.0.3
         ports:
-            - 8080:80
+            - 8081:80
         volumes:
             - collectiveaccess_web:/var/www/html
         environment:
-            - PROVIDENCE_DB_HOST=providence_db
-            - PROVIDENCE_DB_USER=providence
-            - PROVIDENCE_DB_PASSWORD=prvdnc
-            - PROVIDENCE_DB_NAME=providence
+            - PROVIDENCE_DB_HOST=collectiveaccess_db
+            - PROVIDENCE_DB_USER=collectiveaccess
+            - PROVIDENCE_DB_PASSWORD=collectiveaccess
+            - PROVIDENCE_DB_NAME=collectiveaccess
    
 networks:
     collectiveaccess:

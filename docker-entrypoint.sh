@@ -52,15 +52,18 @@ then
     sed -i 's/info@put-your-domain-here.com/'"$PROVIDENCE_ADMIN_EMAIL"'/g' /var/www/html/setup.php
 fi
 
+# Sortu 'fototeka' erabiltzailea
+id -u fototeka &>/dev/null || useradd -d /var/www/html -s /bin/bash fototeka
+
 # Sortu lotura sinbolikoa
 if [ ! -d /var/www/html/media ]
 then
     ln -s  /var/www/html/admin/media /var/www/html/media
-    chown -h www-data:www-data /var/www/html/media/
+    chown -h fototeka:fototeka /var/www/html/media/
 fi
 
 # Baimenak egokitu
-chown -R www-data:www-data /var/www/html/
+chown -R fototeka:fototeka /var/www/html/
 
 # PHP.ini egokitu
 sed -i -E 's/upload_max_filesize = [0-9]+M/upload_max_filesize = 8M/g' /usr/local/etc/php/php.ini
