@@ -4,9 +4,6 @@ FROM php:7.3-apache-buster
 # Konfigurazioa
 #
 
-# Erabiltzaile nagusia
-USER fototeka
-
 # Apache erabiltzailea
 ENV APACHE_RUN_USER fototeka
 ENV APACHE_RUN_GROUP fototeka

@@ -36,6 +36,8 @@ services:
             - PROVIDENCE_DB_USER=collectiveaccess
             - PROVIDENCE_DB_PASSWORD=collectiveaccess
             - PROVIDENCE_DB_NAME=collectiveaccess
+            - FOTOTEKA_USER_ID=1001
+            - FOTOTEKA_GROUP_ID=1001
    
 networks:
     collectiveaccess:

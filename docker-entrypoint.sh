@@ -52,8 +52,10 @@ then
     sed -i 's/info@put-your-domain-here.com/'"$PROVIDENCE_ADMIN_EMAIL"'/g' /var/www/html/setup.php
 fi
 
+# Sortu 'fototeka' taldea
+getent group fototeka &>/dev/null || groupadd --gid $FOTOTEKA_GROUP_ID fototeka
 # Sortu 'fototeka' erabiltzailea
-id -u fototeka &>/dev/null || useradd -d /var/www/html -s /bin/bash fototeka
+id -u fototeka &>/dev/null || useradd -d /var/www/html -s /bin/bash -u $FOTOTEKA_USER_ID -g fototeka fototeka
 
 # Sortu lotura sinbolikoa
 if [ ! -d /var/www/html/media ]
