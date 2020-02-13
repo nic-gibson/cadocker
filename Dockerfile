@@ -19,28 +19,28 @@ ENV PHP_ENV ${PHP_ENV:-production}
 
 # Beharrezko paketeak instalatu
 RUN apt-get update && apt-get install -y \
-    build-essential \
     unzip \
     rsync \
     ffmpeg \
     zlib1g-dev \
     libzip-dev \
     libpng-dev \
-    dcraw \
-    libmagickwand-dev \
-    libgraphicsmagick1-dev
+    dcraw
+#    build-essential \
+#    libmagickwand-dev \
+#    libgraphicsmagick1-dev
 
 # Imagemagick
-RUN curl -fsSL -o imagemagick.zip \
-        "https://github.com/ImageMagick/ImageMagick/archive/${IMAGEMAGIC_VERSION}.zip";
-RUN unzip imagemagick.zip > /dev/null; \
-    rm imagemagick.zip;
+#RUN curl -fsSL -o imagemagick.zip \
+#        "https://github.com/ImageMagick/ImageMagick/archive/${IMAGEMAGIC_VERSION}.zip";
+#RUN unzip imagemagick.zip > /dev/null; \
+#    rm imagemagick.zip;
 
-RUN cd ImageMagick-${IMAGEMAGIC_VERSION}; \
-    ./configure; \
-    make; \
-    make install; \
-    ldconfig /usr/local/lib;
+#RUN cd ImageMagick-${IMAGEMAGIC_VERSION}; \
+#    ./configure; \
+#    make; \
+#    make install; \
+#    ldconfig /usr/local/lib;
 
 RUN apt install -y imagemagick;
 
@@ -53,14 +53,6 @@ RUN docker-php-ext-install mysqli
 # GD extensioa instalatu
 RUN docker-php-ext-install gd
 
-# Imagick extensioa
-#RUN pecl install imagick
-#RUN docker-php-ext-enable imagick
-
-# Gmagick extensioa
-#RUN pecl install gmagick-2.0.5RC1
-#RUN docker-php-ext-enable gmagick
-
 #
 # Collectiveaccess
 #
@@ -71,7 +63,7 @@ RUN curl -fsSL -o providence.zip \
 
 RUN unzip providence.zip > /dev/null; \
         rm providence.zip; \
-	mkdir /usr/src/collective-access; \
+    mkdir /usr/src/collective-access; \
         mv providence-${PROVINCE_VERSION}/* /usr/src/collective-access/;
 
 # Pawtucket2
@@ -80,7 +72,7 @@ RUN curl -fsSL -o pawtucket.zip \
 
 RUN unzip pawtucket.zip > /dev/null; \
         rm pawtucket.zip; \
-	mkdir /usr/src/pawtucket; \
+    mkdir /usr/src/pawtucket; \
         mv pawtucket2-${PAWTUCKET_VERSION}/* /usr/src/pawtucket/;
 
 # PHP konfigurazio fitxategia kopiatu
