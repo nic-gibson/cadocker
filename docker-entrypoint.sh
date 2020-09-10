@@ -20,7 +20,7 @@ fi
 # Konfigurazio fitxategia sortu, ez bada existitzen
 if [ ! -f /var/www/html/admin/setup.php ]
 then
-    cp /var/www/html/admin/setup.php-dist /var/www/html/admin/setup.php 
+    cp /var/www/html/admin/setup.php-dist /var/www/html/admin/setup.php
 
     # DB konexioa
     sed -i 's/localhost/'"$PROVIDENCE_DB_HOST"'/g' /var/www/html/admin/setup.php
@@ -39,7 +39,7 @@ cp -r /usr/src/pawtucket/* /var/www/html/
 # Konfigurazio fitxategia sortu
 if [ ! -f /var/www/html/setup.php ]
 then
-    cp /var/www/html/setup.php-dist /var/www/html/setup.php 
+    cp /var/www/html/setup.php-dist /var/www/html/setup.php
 
     # DB konexioa
     sed -i 's/localhost/'"$PROVIDENCE_DB_HOST"'/g' /var/www/html/setup.php
@@ -68,7 +68,9 @@ fi
 chown -R fototeka:fototeka /var/www/html/
 
 # PHP.ini egokitu
-sed -i -E 's/upload_max_filesize = [0-9]+M/upload_max_filesize = 8M/g' /usr/local/etc/php/php.ini
+# Errepresentazio bat kargatzean "CSRF token is not valid" errorea ematen badu tamaina muga gainditu delako izan daiteke (Lehen 8M zen).
+sed -i -E 's/upload_max_filesize = [0-9]+M/upload_max_filesize = 50M/g' /usr/local/etc/php/php.ini
+sed -i -E 's/post_max_size = [0-9]+M/post_max_size = 50M/g' /usr/local/etc/php/php.ini
 
 # PHP entrypoint
 if [ "${1#-}" != "$1" ]; then
