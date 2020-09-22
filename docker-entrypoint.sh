@@ -69,8 +69,8 @@ chown -R fototeka:fototeka /var/www/html/
 
 # PHP.ini egokitu
 # Errepresentazio bat kargatzean "CSRF token is not valid" errorea ematen badu tamaina muga gainditu delako izan daiteke (Lehen 8M zen).
-sed -i -E 's/upload_max_filesize = [0-9]+M/upload_max_filesize = 50M/g' /usr/local/etc/php/php.ini
-sed -i -E 's/post_max_size = [0-9]+M/post_max_size = 50M/g' /usr/local/etc/php/php.ini
+sed -i -E 's/upload_max_filesize = [0-9]+M/upload_max_filesize = 100M/g' /usr/local/etc/php/php.ini
+sed -i -E 's/post_max_size = [0-9]+M/post_max_size = 100M/g' /usr/local/etc/php/php.ini
 
 # PHP entrypoint
 if [ "${1#-}" != "$1" ]; then
