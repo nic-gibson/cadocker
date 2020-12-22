@@ -72,6 +72,11 @@ chown -R fototeka:fototeka /var/www/html/
 sed -i -E 's/upload_max_filesize = [0-9]+M/upload_max_filesize = 150M/g' /usr/local/etc/php/php.ini
 sed -i -E 's/post_max_size = [0-9]+M/post_max_size = 150M/g' /usr/local/etc/php/php.ini
 
+# Redis kontainer batekin erabili ahal izateko.
+# https://stackoverflow.com/questions/8141407/install-pecl-modules-without-the-prompts
+printf "\n" | pecl install redis
+echo "extension=redis.so" >> /usr/local/etc/php/php.ini
+
 # PHP entrypoint
 if [ "${1#-}" != "$1" ]; then
 	set -- apache2-foreground "$@"
