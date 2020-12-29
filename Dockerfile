@@ -82,6 +82,12 @@ RUN unzip pawtucket.zip > /dev/null; \
 # PHP konfigurazio fitxategia kopiatu
 RUN cp /usr/local/etc/php/php.ini-$PHP_ENV /usr/local/etc/php/php.ini;
 
+# Composer behar dugu (ikusi entrypoint-a)
+RUN set -ex \
+    && curl -sS https://getcomposer.org/installer | php -- \
+        --install-dir=/usr/bin \
+        --filename=composer
+
 #
 # Garbiketak
 #
@@ -93,7 +99,7 @@ RUN rm -rf providence-${PROVINCE_VERSION}; \
 # Martxan jartzeko
 #
 
-COPY docker-entrypoint.sh /usr/local/bin/       
+COPY docker-entrypoint.sh /usr/local/bin/
 
 VOLUME /var/www/html
 
