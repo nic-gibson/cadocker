@@ -77,7 +77,8 @@ sed -i -E 's/post_max_size = [0-9]+M/post_max_size = 150M/g' /usr/local/etc/php/
 printf "\n" | pecl install redis
 echo "extension=redis.so" >> /usr/local/etc/php/php.ini
 
-composer --working-dir=/var/www/html/admin require phpoffice/phpspreadsheet
+# 1.16.0 bertsio berriak menpekotasun arazoak ematen zituen.
+composer --working-dir=/var/www/html/admin require phpoffice/phpspreadsheet:1.15.0
 
 # PHP entrypoint
 if [ "${1#-}" != "$1" ]; then
