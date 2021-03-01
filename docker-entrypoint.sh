@@ -80,6 +80,10 @@ echo "extension=redis.so" >> /usr/local/etc/php/php.ini
 # 1.16.0 bertsio berriak menpekotasun arazoak ematen zituen.
 composer --working-dir=/var/www/html/admin require phpoffice/phpspreadsheet:1.15.0
 
+# convert-ek erroreak ematen ditu fitxategi handiekin. Memoria eta disko gehiago erabiltzen utzi.
+sed -i -E 's/name="memory" value="[0-9]+MiB"/name="memory" value="3GiB"/g' /etc/ImageMagick-6/policy.xml
+sed -i -E 's/name="disk" value="[0-9]+GiB"/name="disk" value="3GiB"/g' /etc/ImageMagick-6/policy.xml
+
 # PHP entrypoint
 if [ "${1#-}" != "$1" ]; then
 	set -- apache2-foreground "$@"
