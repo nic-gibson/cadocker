@@ -72,6 +72,9 @@ chown -R fototeka:fototeka /var/www/html/
 sed -i -E 's/upload_max_filesize = [0-9]+M/upload_max_filesize = 150M/g' /usr/local/etc/php/php.ini
 sed -i -E 's/post_max_size = [0-9]+M/post_max_size = 150M/g' /usr/local/etc/php/php.ini
 
+# Exekuzio denbora 30 segundotik 60ra handitu. Bilaketak egiten denbora asko pasatzen du batzuetan.
+sed -i -E 's/max_execution_time = [0-9]+/max_execution_time = 60/g' /usr/local/etc/php/php.ini
+
 # Redis kontainer batekin erabili ahal izateko.
 # https://stackoverflow.com/questions/8141407/install-pecl-modules-without-the-prompts
 printf "\n" | pecl install redis
