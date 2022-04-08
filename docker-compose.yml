@@ -2,43 +2,40 @@ version: '3'
 
 volumes:
     collectiveaccess_web:
-    collectiveaccess_db:
-    
+ 
 services:
-    collectiveaccess_db:
-        image: mariadb
-        container_name: collectiveaccess_db
-        restart: always
-        networks:
-            collectiveaccess:
-                ipv4_address: 172.16.0.2
-        volumes:
-            - collectiveaccess_db:/var/lib/mysql
-        environment:
-            - MYSQL_RANDOM_ROOT_PASSWORD=yes
-            - MYSQL_DATABASE=collectiveaccess
-            - MYSQL_USER=collectiveaccess
-            - MYSQL_PASSWORD=collectiveaccess
-
     collectiveaccess_web:
-        image: iametza/collective-access:1.7.8
+        image: iametza/collective-access:1.7.8.7
         container_name: collectiveaccess_web
         restart: always
         networks:
             collectiveaccess:
-                ipv4_address: 172.16.0.3
+                ipv4_address: 172.16.0.2
         ports:
-            - 8081:80
+                - 127.0.0.1:8080:80
         volumes:
-            - collectiveaccess_web:/var/www/html
+            - /var/www/vhosts/fototeka.argia.eus/httpdocs/web:/var/www/html
+            - /var/www/vhosts/fototeka.argia.eus/httpdocs/.htpasswd:/var/www/.htpasswd # Argitaratu bitartean erabiltzaile eta pasahitzarekin babestuta dago alde publikoa.
+            - "/etc/timezone:/etc/timezone:ro"
+            - "/etc/localtime:/etc/localtime:ro"
         environment:
-            - PROVIDENCE_DB_HOST=collectiveaccess_db
-            - PROVIDENCE_DB_USER=collectiveaccess
-            - PROVIDENCE_DB_PASSWORD=collectiveaccess
-            - PROVIDENCE_DB_NAME=collectiveaccess
-            - FOTOTEKA_USER_ID=1000
-            - FOTOTEKA_GROUP_ID=1000
-   
+            - PROVIDENCE_DB_HOST=172.16.0.1
+            - PROVIDENCE_DB_USER=fotoargi
+            - PROVIDENCE_DB_PASSWORD=FK8pdq9CjMz0kHK8MHua
+            - PROVIDENCE_DB_NAME=argia_fototeka
+            - FOTOTEKA_USER_ID=10000
+            - FOTOTEKA_GROUP_ID=1003
+        depends_on:
+            - redis
+    redis:
+        image: redis:5.0.10
+        container_name: collectiveaccess_redis
+        networks:
+            collectiveaccess:
+                ipv4_address: 172.16.0.3
+        restart: always
+        volumes:
+            - /var/www/vhosts/fototeka.argia.eus/httpdocs/redis:/data
 networks:
     collectiveaccess:
         driver: bridge
